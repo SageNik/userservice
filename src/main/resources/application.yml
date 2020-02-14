@@ -1,0 +1,48 @@
+server:
+  port: 8101
+
+spring:
+  flyway:
+    url: jdbc:postgresql://localhost:5432/userdb
+    user: postgres_dev
+    password: postgres
+    schemas: main
+    locations: classpath:db/migration
+    enabled: true
+  r2dbc:
+    url: r2dbc:postgresql://localhost/userdb
+    username: postgres_dev
+    password: postgres
+
+oauth2:
+  config:
+    web:
+      client: webClient
+      secret: webClientSecret
+      access_token_validity_seconds: 5000
+      refresh_token_validity_seconds: 500000
+    server:
+      client: serverClient
+      secret: serverClientSecret
+      access_token_validity_seconds: 5000
+      refresh_token_validity_seconds: 500000
+
+verification:
+  code:
+    expiration: 1
+
+aws:
+  access-key: your_access_key
+  secret-key: your_secret_key
+  sns:
+    region: us-east-1
+    sender-id: UserService
+
+  ses:
+    sender-email: your_verified_sender_email
+    region: us-east-1
+
+logging:
+  level:
+    org.springframework: info
+    org.springframework.data.r2dbc: debug
