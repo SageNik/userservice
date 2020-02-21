@@ -3,14 +3,14 @@ server:
 
 spring:
   flyway:
-    url: jdbc:postgresql://localhost:5432/userdb
+    url: jdbc:postgresql://postgres:5432/userdb
     user: postgres_dev
     password: postgres
     schemas: main
     locations: classpath:db/migration
     enabled: true
   r2dbc:
-    url: r2dbc:postgresql://localhost/userdb
+    url: r2dbc:postgresql://postgres:5432/userdb
     username: postgres_dev
     password: postgres
 
