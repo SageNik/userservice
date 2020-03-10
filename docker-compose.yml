@@ -19,7 +19,7 @@ services:
     networks:
       - user_net
   postgres:
-    image: postgres
+    image: debezium/postgres:11
     ports:
       - 54321:5432
     volumes:
@@ -28,6 +28,16 @@ services:
       POSTGRES_DB: userdb
       POSTGRES_USER: postgres_dev
       POSTGRES_PASSWORD: postgres
+    networks:
+      - user_net
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+    ports:
+      - 9200:9200
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
     networks:
       - user_net
 # APP*****************************************
@@ -52,6 +62,7 @@ services:
     links:
       - kafka
       - postgres
+      - elastic
     environment:
       - BOOTSTRAP_SERVERS=kafka:9092
       - GROUP_ID=1
