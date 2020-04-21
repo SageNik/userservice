@@ -50,3 +50,19 @@ Java 11+
 Spring Boot, WebFlux
 PostgreSQL (+ postgres-r2dbc reactive driver) 
 AWS for emails and SMS 
+
+
+
+
+# Start the application
+
+
+docker-compose -f docker-compose.yaml up
+
+# Start Elasticsearch connector
+
+curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @es-sink.json
+
+# Start MySQL connector
+
+curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @source.json
