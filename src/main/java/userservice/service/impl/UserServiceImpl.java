@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import userservice.dto.UserRegistryDto;
 import userservice.enums.Role;
@@ -16,8 +17,8 @@ import userservice.exception.UserAlreadyExistsException;
 import userservice.exception.VerificationCodeExpiredException;
 import userservice.persistence.model.User;
 import userservice.persistence.model.VerificationCode;
-import userservice.persistence.repository.UserRepository;
-import userservice.persistence.repository.VerificationCodeRepository;
+import userservice.persistence.repository.r2dbc.UserRepository;
+import userservice.persistence.repository.r2dbc.VerificationCodeRepository;
 import userservice.service.NotificationService;
 import userservice.service.UserService;
 
@@ -25,6 +26,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
@@ -78,10 +80,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Flux<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findFirstByUsername(username).blockOptional().orElseThrow(() -> new RuntimeException("User not found: " + username));
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Arrays.asList(authority));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.singletonList(authority));
     }
 
     private Mono<User> sendVerificationCode(User user) {

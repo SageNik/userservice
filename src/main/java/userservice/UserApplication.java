@@ -5,11 +5,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.elasticsearch.repository.config.EnableReactiveElasticsearchRepositories;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 
 @Slf4j
 @SpringBootApplication
-@EnableR2dbcRepositories(basePackages = "userservice.persistence.repository")
+@EnableR2dbcRepositories(basePackages = "userservice.persistence.repository.r2dbc")
+@EnableReactiveElasticsearchRepositories(basePackages = "userservice.persistence.repository.elastic")
 public class UserApplication {
 
     public static void main(String[] args) {

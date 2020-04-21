@@ -13,6 +13,14 @@ spring:
     url: r2dbc:postgresql://postgres:5432/userdb
     username: postgres_dev
     password: postgres
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: elastic:9200
+  elasticsearch:
+    rest:
+      uris: http://elastic:9200
 
 oauth2:
   config:

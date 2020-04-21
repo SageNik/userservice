@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import userservice.dto.UserRegistryDto;
+import userservice.persistence.model.User;
 import userservice.service.UserService;
 
 @RestController
@@ -27,8 +29,8 @@ public class UserController {
         return userService.verifyUser(verificationCode);
     }
 
-    @GetMapping(value = "/something")
-    public Mono<String> getSomething(){
-        return Mono.just("Hello body!");
+    @GetMapping(value = "/all")
+    public Flux<User> getSomething(){
+        return userService.getAllUsers();
     }
 }

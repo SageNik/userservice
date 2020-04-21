@@ -3,6 +3,7 @@ package userservice.persistence.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
