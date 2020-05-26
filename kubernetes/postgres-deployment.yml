@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    name: postgres-pod
+    app: userservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-pod
+      app: userservice-app
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-pod
+        app: userservice-app
+    spec:
+      containers:
+        - name: postgres
+          image: debezium/postgres:11
+          env:
+            - name: POSTGRES_DB
+              value: "userdb"
+            - name: POSTGRES_USER
+              value: "postgres_dev"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+          ports:
+            - containerPort: 5432

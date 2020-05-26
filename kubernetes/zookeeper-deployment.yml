@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper-deployment
+  labels:
+    app: userservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: zookeeper-pod
+      app: userservice-app
+  template:
+    metadata:
+      name: zookeeper-pod
+      labels:
+        name: zookeeper-pod
+        app: userservice-app
+    spec:
+      containers:
+        - name: zookeeper
+          image: debezium/zookeeper:1.1
+          ports:
+            - containerPort: 2181
+            - containerPort: 2888
+            - containerPort: 3888

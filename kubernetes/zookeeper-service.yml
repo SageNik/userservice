@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  labels:
+    app: userservice-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 2181
+      targetPort: 2181
+    - port: 2888
+      targetPort: 2888
+    - port: 3888
+      targetPort: 3888
