@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafkaconnect-deployment
+  labels:
+    name: kafkaconnect-pod
+    app: userservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kafkaconnect-pod
+      app: userservice-app
+  template:
+    metadata:
+      name: kafkaconnect-pod
+      labels:
+        name: kafkaconnect-pod
+        app: userservice-app
+    spec:
+      containers:
+        - name: kafkaconnect-container
+          image: debezium/connect:0.10.0.CR1
+          readinessProbe:
+            httpGet:
+              port: 8083
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8083
+              path: /
+          env:
+            - name: BOOTSTRAP_SERVERS
+              value: kafka:9092
+            - name: GROUP_ID
+              value: "1"
+            - name: OFFSET_STORAGE_TOPIC
+              value: connect-offsets
+            - name: CONFIG_STORAGE_TOPIC
+              value: connect-configs
+            - name: STATUS_STORAGE_TOPIC
+              value: connect-status
+          ports:
+          - containerPort: 8083
