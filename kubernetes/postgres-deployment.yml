@@ -21,6 +21,14 @@ spec:
       containers:
         - name: postgres
           image: debezium/postgres:11
+          readinessProbe:
+            httpGet:
+              port: 8083
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8083
+              path: /
           env:
             - name: POSTGRES_DB
               value: "userdb"

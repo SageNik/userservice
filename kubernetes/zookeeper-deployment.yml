@@ -20,6 +20,14 @@ spec:
       containers:
         - name: zookeeper
           image: debezium/zookeeper:1.1
+          readinessProbe:
+            httpGet:
+              port: 8083
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8083
+              path: /
           ports:
             - containerPort: 2181
             - containerPort: 2888
