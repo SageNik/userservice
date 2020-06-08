@@ -16,3 +16,6 @@ spec:
     - port: 3888
       targetPort: 3888
       name: "election"
+  selector:
+    name: zookeeper-pod
+    app: userservice-app

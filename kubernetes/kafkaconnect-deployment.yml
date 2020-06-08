@@ -21,14 +21,22 @@ spec:
       containers:
         - name: kafkaconnect-container
           image: debezium/connect:0.10.0.CR1
-          readinessProbe:
-            httpGet:
-              port: 8083
-              path: /
-          livenessProbe:
-            httpGet:
-              port: 8083
-              path: /
+#          readinessProbe:
+#            httpGet:
+#              port: 8083
+#              path: /
+#            initialDelaySeconds: 120
+#            periodSeconds: 5
+#            timeoutSeconds: 5
+#            failureThreshold: 10
+#          livenessProbe:
+#            httpGet:
+#              port: 8083
+#              path: /
+#            initialDelaySeconds: 120
+#            periodSeconds: 5
+#            timeoutSeconds: 5
+#            failureThreshold: 10
           env:
             - name: BOOTSTRAP_SERVERS
               value: kafka:9092

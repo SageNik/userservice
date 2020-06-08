@@ -9,3 +9,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 9092
+      targetPort: 9092
+  selector:
+    name: kafka-pod
+    app: userservice-app

@@ -20,13 +20,5 @@ spec:
       containers:
         - name: userservice
           image: olnik27/userservice
-          readinessProbe:
-            httpGet:
-              port: 8083
-              path: /
-          livenessProbe:
-            httpGet:
-              port: 8083
-              path: /
           ports:
-            - containerPort: 8081
+            - containerPort: 8101

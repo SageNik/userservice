@@ -21,14 +21,6 @@ spec:
       containers:
         - name: elastic
           image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
-          readinessProbe:
-            httpGet:
-              port: 8083
-              path: /
-          livenessProbe:
-            httpGet:
-              port: 8083
-              path: /
           env:
             - name: http.host
               value: "0.0.0.0"

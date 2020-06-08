@@ -8,5 +8,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8081
-      targetPort: 8081
+    - port: 8101
+      targetPort: 8101
+  selector:
+    name: userservice-pod
+    app: userservice-app

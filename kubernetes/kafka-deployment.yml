@@ -21,16 +21,10 @@ spec:
       containers:
         - name: kafka
           image: debezium/kafka:1.1
-          readinessProbe:
-            httpGet:
-              port: 8083
-              path: /
-          livenessProbe:
-            httpGet:
-              port: 8083
-              path: /
           env:
             - name: ZOOKEEPER_CONNECT
               value: "zookeeper:2181"
+            - name: KAFKA_PORT
+              value: "9092"
           ports:
             - containerPort: 9092

@@ -7,5 +7,8 @@ metadata:
     app: userservice-app
 spec:
   ports:
-    - port: 5432
-      targetPort: 54321
+    - port: 54321
+      targetPort: 5432
+  selector:
+    name: postgres-pod
+    app: userservice-app
