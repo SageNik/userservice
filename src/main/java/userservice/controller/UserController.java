@@ -19,18 +19,18 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mono registrationUser(@RequestBody UserRegistryDto userRegistryDto){
-      return userService.registerUser(userRegistryDto);
+    public Mono<Object> registrationUser(@RequestBody UserRegistryDto userRegistryDto) {
+        return userService.registerUser(userRegistryDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/verify/{verificationCode}")
-    public Mono<Object> verificationUser(@PathVariable String verificationCode){
+    public Mono<Object> verificationUser(@PathVariable String verificationCode) {
         return userService.verifyUser(verificationCode);
     }
 
     @GetMapping(value = "/all")
-    public Flux<User> getSomething(){
+    public Flux<User> getSomething() {
         return userService.getAllUsers();
     }
 }

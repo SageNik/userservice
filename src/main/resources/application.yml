@@ -54,3 +54,8 @@ logging:
   level:
     org.springframework: info
     org.springframework.data.r2dbc: debug
+
+kafka-connect:
+  uri: http://localhost:8083/connectors/
+  connectors:
+    folder: static/kafka-connect
